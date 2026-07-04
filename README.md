@@ -164,28 +164,35 @@ light-fan-project/
 
 ## Screenshots
 
-<table>
-  <tr>
-    <td align="center">
-      <img src="screen_shots/ss1.png" alt="Live overview dashboard" width="100%" />
-      <br />Live overview
-    </td>
-    <td align="center">
-      <img src="screen_shots/ss2.png" alt="Power usage history dashboard" width="100%" />
-      <br />Power history
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="screen_shots/ss3.png" alt="Energy usage and cost dashboard" width="100%" />
-      <br />Usage and costs
-    </td>
-    <td align="center">
-      <img src="screen_shots/ss4.png" alt="AI summary dashboard" width="100%" />
-      <br />AI summary
-    </td>
-  </tr>
-</table>
+## 📸 Live Overview
+
+<p align="center">
+  <img src="./screen_shots/ss1.png" alt="Live overview dashboard" width="700"/>
+</p>
+
+---
+
+## ⚡ Power Usage History
+
+<p align="center">
+  <img src="./screen_shots/ss2.png" alt="Power usage history dashboard" width="700"/>
+</p>
+
+---
+
+## 💰 Usage & Costs
+
+<p align="center">
+  <img src="./screen_shots/ss3.png" alt="Energy usage and cost dashboard" width="700"/>
+</p>
+
+---
+
+## 🧠 AI Summary
+
+<p align="center">
+  <img src="./screen_shots/ss4.png" alt="AI summary dashboard" width="700"/>
+</p>
 
 ---
 
