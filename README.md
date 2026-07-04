@@ -82,14 +82,14 @@ Because real IoT hardware was unavailable during development, a **simulation lay
 
 ## Tech Stack
 
-| Layer        | Technology |
-|--------------|-----------|
-| Backend      | Python 3.10+, FastAPI, Uvicorn, Pydantic |
-| Simulation   | asyncio (in-process loop) |
-| AI           | Google Gemini (`gemini-2.5-flash`) via `google-genai` |
-| Frontend     | Next.js 16, React 19, TypeScript, Tailwind CSS 4, Recharts, shadcn/ui |
-| Bot          | discord.py 2.x, aiohttp |
-| Transport    | REST (HTTP) + WebSocket |
+| Layer      | Technology                                                            |
+| ---------- | --------------------------------------------------------------------- |
+| Backend    | Python 3.10+, FastAPI, Uvicorn, Pydantic                              |
+| Simulation | asyncio (in-process loop)                                             |
+| AI         | Google Gemini (`gemini-2.5-flash`) via `google-genai`                 |
+| Frontend   | Next.js 16, React 19, TypeScript, Tailwind CSS 4, Recharts, shadcn/ui |
+| Bot        | discord.py 2.x, aiohttp                                               |
+| Transport  | REST (HTTP) + WebSocket                                               |
 
 ---
 
@@ -126,23 +126,27 @@ light-fan-project/
 ## Features
 
 ### Live Dashboard
+
 - **KPI bar** — total power (W), estimated kWh today, number of monitored rooms.
 - **Room panels** — per-room list of every fan and light with status, wattage, and last-changed timestamp.
 - **Alerts panel** — after-hours activity (≥ 3 devices still ON) and devices ON for 2+ hours.
 - **Status pill** — WebSocket connection health.
 
 ### Power Usage History (`/history`)
+
 - Interactive Recharts line chart of power readings over time.
 - Current, average, and peak power consumption.
 - Room-wise energy distribution.
 
 ### Energy Usage (`/usage`)
+
 - Today’s energy consumption (kWh).
 - Estimated electricity cost using **Bangladesh’s tariff**.
 - Projected monthly bill.
 - Peak and average power.
 
 ### AI Insights (`/ai-insights`)
+
 - Google Gemini turns raw state into:
   - **Usage insights** — highest-consuming rooms/devices.
   - **Waste insights** — inefficiencies and idle devices.
@@ -151,9 +155,37 @@ light-fan-project/
   - **Recommendations** — concrete actions to reduce waste.
 
 ### Discord Bot
+
 - `/status` — total power + room breakdown.
 - `/room <name>` — fan/light count and power for a specific room (`drawing_room`, `work1`, `work2`).
 - `/usage` — current power and estimated daily kWh.
+
+---
+
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="screen_shots/ss1.png" alt="Live overview dashboard" width="100%" />
+      <br />Live overview
+    </td>
+    <td align="center">
+      <img src="screen_shots/ss2.png" alt="Power usage history dashboard" width="100%" />
+      <br />Power history
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screen_shots/ss3.png" alt="Energy usage and cost dashboard" width="100%" />
+      <br />Usage and costs
+    </td>
+    <td align="center">
+      <img src="screen_shots/ss4.png" alt="AI summary dashboard" width="100%" />
+      <br />AI summary
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -168,7 +200,7 @@ You will need **three** things running locally:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/maruf6890/Office-Monitor.git
+git clone https://github.com/maruf6890/office-electricity-tracker
 cd Office-Monitor
 ```
 
@@ -265,13 +297,15 @@ package.bat dev
 ```
 
 You should see:
+
 - FastAPI boot logs.
 - After 5 seconds, the simulator begins broadcasting state.
 
 Visit:
+
 - REST: `http://localhost:8000/state`
 - Docs: `http://localhost:8000/docs`
-- WS:   `ws://localhost:8000/ws`
+- WS: `ws://localhost:8000/ws`
 
 ### Terminal 2 — Discord Bot
 
@@ -300,13 +334,13 @@ The dashboard hydrates with REST and then switches to live WebSocket updates. Yo
 
 Base URL: `http://localhost:8000`
 
-| Method | Endpoint         | Description |
-|--------|------------------|-------------|
-| `GET`  | `/state`         | Full snapshot: devices, stats, recent alerts. |
-| `GET`  | `/room/{room}`   | Devices + power for a single room. |
-| `GET`  | `/usage`         | Total power (W) and estimated kWh today. |
-| `WS`   | `/ws`            | Live push of `{ devices, stats, alerts }` every simulator tick. |
-| `GET`  | `/ai-insights`   | Gemini-generated insights (if wired into `main.py`). |
+| Method | Endpoint       | Description                                                     |
+| ------ | -------------- | --------------------------------------------------------------- |
+| `GET`  | `/state`       | Full snapshot: devices, stats, recent alerts.                   |
+| `GET`  | `/room/{room}` | Devices + power for a single room.                              |
+| `GET`  | `/usage`       | Total power (W) and estimated kWh today.                        |
+| `WS`   | `/ws`          | Live push of `{ devices, stats, alerts }` every simulator tick. |
+| `GET`  | `/ai-insights` | Gemini-generated insights (if wired into `main.py`).            |
 
 Example:
 
@@ -326,13 +360,14 @@ curl http://localhost:8000/state | jq
 
 ## Discord Bot Commands
 
-| Command          | Description                                            |
-|------------------|--------------------------------------------------------|
-| `/status`        | Total power + per-room breakdown of fans, lights, W.   |
-| `/room <name>`   | Detailed view for `drawing_room`, `work1`, or `work2`. |
-| `/usage`         | Current total power and estimated daily kWh.           |
+| Command        | Description                                            |
+| -------------- | ------------------------------------------------------ |
+| `/status`      | Total power + per-room breakdown of fans, lights, W.   |
+| `/room <name>` | Detailed view for `drawing_room`, `work1`, or `work2`. |
+| `/usage`       | Current total power and estimated daily kWh.           |
 
 Color cues on `/room`:
+
 - 🟢 Green — power < 100 W
 - 🟠 Orange — power < 200 W
 - 🔴 Red — power ≥ 200 W
